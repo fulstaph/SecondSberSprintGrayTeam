@@ -14,6 +14,8 @@ class SplashViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
+        // if we're here it means we're not logged in
+        
         // start button set-up
         let startButton = UIButton(frame: CGRect(x: 0, y: 0, width: 150, height: 50))
         startButton.center = view.center
@@ -31,11 +33,17 @@ class SplashViewController: UIViewController {
         welcomeLabel.text = "Welcome!"
         welcomeLabel.font = .systemFont(ofSize: 22)
         view.addSubview(welcomeLabel)
+        
     }
     
     @objc
     func onStartButtonTapped() {
-        
+        let loggedIn = UserDefaults.standard.bool(forKey: "LOGGED_IN")
+        if loggedIn {
+            AppDelegate.shared.rootViewController.showTasksScreen()
+        } else {
+            AppDelegate.shared.rootViewController.showLogInScreen()
+        }
     }
 
     /*

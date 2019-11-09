@@ -7,10 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B18093DB2376375A00C650D7 /* TasksScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18093DA2376375A00C650D7 /* TasksScreenViewController.swift */; };
+		B18093DD2376396500C650D7 /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18093DC2376396500C650D7 /* LoginScreenViewController.swift */; };
+		B18093DF2376447D00C650D7 /* SignInScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18093DE2376447D00C650D7 /* SignInScreenViewController.swift */; };
 		B18D84A12375D72500D4111C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D84A02375D72500D4111C /* AppDelegate.swift */; };
 		B18D84A32375D72500D4111C /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D84A22375D72500D4111C /* RootViewController.swift */; };
 		B18D84A82375D72700D4111C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B18D84A72375D72700D4111C /* Assets.xcassets */; };
 		B18D84B62375D72700D4111C /* SecondSprintAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D84B52375D72700D4111C /* SecondSprintAppTests.swift */; };
+		B1E5CBA923765725001DF426 /* SignUpScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E5CBA823765725001DF426 /* SignUpScreenViewController.swift */; };
 		B1F1814E2375FFD100FD29AA /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F1814D2375FFD100FD29AA /* SplashViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +29,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B18093DA2376375A00C650D7 /* TasksScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksScreenViewController.swift; sourceTree = "<group>"; };
+		B18093DC2376396500C650D7 /* LoginScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
+		B18093DE2376447D00C650D7 /* SignInScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreenViewController.swift; sourceTree = "<group>"; };
 		B18D849D2375D72500D4111C /* SecondSprintApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SecondSprintApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B18D84A02375D72500D4111C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B18D84A22375D72500D4111C /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -33,6 +40,7 @@
 		B18D84B12375D72700D4111C /* SecondSprintAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SecondSprintAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B18D84B52375D72700D4111C /* SecondSprintAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondSprintAppTests.swift; sourceTree = "<group>"; };
 		B18D84B72375D72700D4111C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B1E5CBA823765725001DF426 /* SignUpScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreenViewController.swift; sourceTree = "<group>"; };
 		B1F1814D2375FFD100FD29AA /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,6 +86,10 @@
 				B18D84A02375D72500D4111C /* AppDelegate.swift */,
 				B18D84A22375D72500D4111C /* RootViewController.swift */,
 				B1F1814D2375FFD100FD29AA /* SplashViewController.swift */,
+				B18093DC2376396500C650D7 /* LoginScreenViewController.swift */,
+				B18093DE2376447D00C650D7 /* SignInScreenViewController.swift */,
+				B1E5CBA823765725001DF426 /* SignUpScreenViewController.swift */,
+				B18093DA2376375A00C650D7 /* TasksScreenViewController.swift */,
 				B18D84A72375D72700D4111C /* Assets.xcassets */,
 				B18D84AC2375D72700D4111C /* Info.plist */,
 			);
@@ -193,8 +205,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1F1814E2375FFD100FD29AA /* SplashViewController.swift in Sources */,
+				B1E5CBA923765725001DF426 /* SignUpScreenViewController.swift in Sources */,
 				B18D84A32375D72500D4111C /* RootViewController.swift in Sources */,
 				B18D84A12375D72500D4111C /* AppDelegate.swift in Sources */,
+				B18093DD2376396500C650D7 /* LoginScreenViewController.swift in Sources */,
+				B18093DF2376447D00C650D7 /* SignInScreenViewController.swift in Sources */,
+				B18093DB2376375A00C650D7 /* TasksScreenViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
