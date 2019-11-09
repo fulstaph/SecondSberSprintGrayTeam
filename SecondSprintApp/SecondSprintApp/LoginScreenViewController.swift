@@ -69,7 +69,8 @@ class LoginScreenViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
     }
-//    override func viewWillAppear(_ animated: Bool) {
-//
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        navigationController?.isNavigationBarHidden = true
 //    }
 }
