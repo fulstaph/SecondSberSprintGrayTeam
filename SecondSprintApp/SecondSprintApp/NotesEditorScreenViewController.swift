@@ -22,19 +22,20 @@ class NotesEditorScreenViewController: UIViewController {
         
         let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
         textField.center = view.center
+        textField.textAlignment = .center
         textField.backgroundColor = .gray
         view.addSubview(textField)
     }
     
     @objc
     func onBackButtonTapped() {
-        AppDelegate.shared.rootViewController.switchToTaskScreen()
+        navigationController?.popViewController(animated: true)
     }
     
     @objc
     func onSaveButtonTapped() {
         noteNum += 1
-        AppDelegate.shared.rootViewController.switchToTaskScreen()
+        navigationController?.popViewController(animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -22,7 +22,7 @@ class SignInScreenViewController: UIViewController {
         let (x, y) = (view.center.x, view.center.y)
         
         let logInButton = UIButton(frame: CGRect(x: 0, y: 0, width: 150, height: 50))
-        logInButton.center = CGPoint(x: x, y: y + 90)
+        logInButton.center = CGPoint(x: x, y: y)
         logInButton.layer.cornerRadius = 20
         logInButton.setTitle("Press the button", for: .normal)
         logInButton.setTitleColor(.black, for: .normal)
@@ -30,6 +30,7 @@ class SignInScreenViewController: UIViewController {
         logInButton.addTarget(self, action: #selector(onLogInButtonPressed), for: .touchUpInside)
         view.addSubview(logInButton)
         navigationItem.setLeftBarButton(backButton, animated: true)
+        navigationItem.title = "Check-in"
         // Do any additional setup after loading the view.
     }
     
@@ -38,13 +39,13 @@ class SignInScreenViewController: UIViewController {
     func onLogInButtonPressed() {
         // to do
         UserDefaults.standard.set(true, forKey: "LOGGED_IN")
-        AppDelegate.shared.rootViewController.switchToTaskScreen()
+        AppDelegate.shared.rootViewController.showTaskScreen()
     }
     
     
     @objc
     func logout() {
-        AppDelegate.shared.rootViewController.switchBackToLogInScreen()
+        navigationController?.popViewController(animated: true)
     }
     /*
      
@@ -56,5 +57,7 @@ class SignInScreenViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = false
+    }
 }

@@ -36,102 +36,38 @@ class RootViewController: UIViewController {
         view.addSubview(current.view)
         current.didMove(toParent: self)
     }
-
+    
     func showLogInScreen() {
-        let navigationController = UINavigationController(rootViewController: LoginScreenViewController())
-        navigationController.isNavigationBarHidden = true
-        addChild(navigationController)
-        navigationController.view.bounds = view.bounds
-        view.addSubview(navigationController.view)
-        navigationController.didMove(toParent: self)
+        let new = UINavigationController(rootViewController: LoginScreenViewController())
+        addChild(new)
+        new.view.frame = view.bounds
+        view.addSubview(new.view)
+        new.didMove(toParent: self)
         current.willMove(toParent: nil)
         current.view.removeFromSuperview()
         current.removeFromParent()
-        current = navigationController
+        current = new
     }
     
-    func showTasksScreen() {
-        let navigationController = UINavigationController(rootViewController: TasksScreenViewController())
-        navigationController.isNavigationBarHidden = true
-        //navigationController.pushViewController(SignUpScreenViewController(), animated: true)
-        addChild(navigationController)
-        navigationController.view.bounds = view.bounds
-        view.addSubview(navigationController.view)
-        navigationController.didMove(toParent: self)
-        current.willMove(toParent: nil)
+    func showTaskScreen() {
+        let navigatorController = UINavigationController(rootViewController: LoginScreenViewController())
+        let mainVC = TasksScreenViewController()
+        let settingVC = SettingsScreenViewController()
+        let notesVc = NotesScreenViewController()
+        let tapBarController = UITabBarController()
+        
+        tapBarController.viewControllers = [mainVC, notesVc, settingVC]
+        mainVC.modalTransitionStyle = .flipHorizontal
+        navigatorController.viewControllers = [tapBarController]
+        
+        addChild(navigatorController)
+        navigatorController.view.frame = view.bounds
+        view.addSubview(navigatorController.view)
+        navigatorController.didMove(toParent: self)
+        navigatorController.willMove(toParent: nil)
         current.view.removeFromSuperview()
         current.removeFromParent()
-        current = navigationController
-        
+        current = navigatorController
     }
     
-    func showSignInScreen() {
-        let signInVC = SignInScreenViewController()
-        let signIn = UINavigationController(rootViewController: signInVC)
-        animateFadeTransition(to: signIn)
-    }
-    
-    func showSignUpScreen() {
-        let signUpVC = SignUpScreenViewController()
-        let signUp = UINavigationController(rootViewController: signUpVC)
-        animateFadeTransition(to: signUp)
-    }
-    
-    func switchBackToLogInScreen() {
-        let loginViewController = LoginScreenViewController()
-        let logoutScreen = UINavigationController(rootViewController: loginViewController)
-        animateDismissTransition(to: logoutScreen)
-    }
-    
-    func switchToTaskScreen() {
-        let tabBarVC = UITabBarController()
-        let taskVC = TasksScreenViewController()
-        let notesVC = NotesScreenViewController()
-        let settingsVC = SettingsScreenViewController()
-        tabBarVC.viewControllers = [taskVC, notesVC, settingsVC]
-        
-        let taskNavigationController = UINavigationController()
-        taskNavigationController.viewControllers = [tabBarVC]
-        animateFadeTransition(to: taskNavigationController)
-    }
-    
-    func switchToNotesScreen() {
-        let noteVC = NotesScreenViewController()
-        let noteScreen = UINavigationController(rootViewController: noteVC)
-        animateDismissTransition(to: noteScreen)
-    }
-    
-    func switchToNoteEditScreen() {
-        let noteEditVC = NotesEditorScreenViewController()
-        let noteEditScreen = UINavigationController(rootViewController: noteEditVC)
-        animateFadeTransition(to: noteEditScreen)
-    }
-    
-    private func animateFadeTransition(to new: UIViewController, completion: (() -> Void)? = nil) {
-        current.willMove(toParent: nil)
-        addChild(new)
-        
-        transition(from: current, to: new, duration: 0.3, options: [.transitionCrossDissolve, .curveEaseOut], animations: {
-        }) { completed in
-            self.current.removeFromParent()
-            new.didMove(toParent: self)
-            self.current = new
-            completion?()  //1
-        }
-    }
-    
-    private func animateDismissTransition(to new: UIViewController, completion: (() -> Void)? = nil) {
-        new.view.frame = CGRect(x: -view.bounds.width, y: 0, width: view.bounds.width, height: view.bounds.height)
-        current.willMove(toParent: nil)
-        addChild(new)
-        transition(from: current, to: new, duration: 0.3, options: [], animations: {
-            new.view.frame = self.view.bounds
-        }) { completed in
-            self.current.removeFromParent()
-            new.didMove(toParent: self)
-            self.current = new
-            completion?()
-        }
-    }
 }
-

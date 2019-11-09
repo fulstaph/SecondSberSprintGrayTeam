@@ -29,9 +29,10 @@ class SplashViewController: UIViewController {
         // welcome label set-up
         
         let welcomeLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
-        welcomeLabel.center = CGPoint(x: view.center.x + 52, y: view.center.y - 300.0)
+        welcomeLabel.center = CGPoint(x: view.center.x, y: view.center.y - 300)
         welcomeLabel.text = "Welcome!"
-        welcomeLabel.font = .systemFont(ofSize: 22)
+        welcomeLabel.font = .systemFont(ofSize: 27)
+        welcomeLabel.textAlignment = .center
         view.addSubview(welcomeLabel)
         
     }
@@ -39,10 +40,12 @@ class SplashViewController: UIViewController {
     @objc
     func onStartButtonTapped() {
         let loggedIn = UserDefaults.standard.bool(forKey: "LOGGED_IN")
+        let rootVC = AppDelegate.shared.rootViewController
         if loggedIn {
-            AppDelegate.shared.rootViewController.switchToTaskScreen()
+            rootVC.showTaskScreen()
+            self.navigationController?.pushViewController(TasksScreenViewController(), animated: true)
         } else {
-            AppDelegate.shared.rootViewController.showLogInScreen()
+            rootVC.showLogInScreen()
         }
     }
 

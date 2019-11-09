@@ -13,7 +13,7 @@ class LoginScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .white
         // Do any additional setup after loading the view.
         
         let (x, y) = (view.center.x, view.center.y)
@@ -21,7 +21,7 @@ class LoginScreenViewController: UIViewController {
         
         let image = UIImage(named: "pikapika")
         let pikaImageView = UIImageView(image: image)
-        pikaImageView.center = CGPoint(x: x, y: y - 202)
+        pikaImageView.center = CGPoint(x: x, y: y - 203)
         view.addSubview(pikaImageView)
         
         let signInButton = UIButton(frame: CGRect(x: 0, y: 0, width: 150, height: 50))
@@ -57,11 +57,19 @@ class LoginScreenViewController: UIViewController {
 
     @objc
     func onSignInButtonTapped() {
-        AppDelegate.shared.rootViewController.showSignInScreen()
+        navigationController?.pushViewController(SignInScreenViewController(), animated: true)
     }
     
     @objc
     func onSignUpButtonTapped() {
-        AppDelegate.shared.rootViewController.showSignUpScreen()
+        navigationController?.pushViewController(SignUpScreenViewController(), animated: true)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+    }
+//    override func viewWillAppear(_ animated: Bool) {
+//
+//    }
 }
