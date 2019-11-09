@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B10F5EB4237667200069B97C /* NotesScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10F5EB3237667200069B97C /* NotesScreenViewController.swift */; };
+		B10F5EB6237667330069B97C /* SettingsScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10F5EB5237667330069B97C /* SettingsScreenViewController.swift */; };
+		B10F5EBA237679FF0069B97C /* NotesEditorScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10F5EB9237679FF0069B97C /* NotesEditorScreenViewController.swift */; };
 		B18093DB2376375A00C650D7 /* TasksScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18093DA2376375A00C650D7 /* TasksScreenViewController.swift */; };
 		B18093DD2376396500C650D7 /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18093DC2376396500C650D7 /* LoginScreenViewController.swift */; };
 		B18093DF2376447D00C650D7 /* SignInScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18093DE2376447D00C650D7 /* SignInScreenViewController.swift */; };
@@ -29,6 +32,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B10F5EB3237667200069B97C /* NotesScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesScreenViewController.swift; sourceTree = "<group>"; };
+		B10F5EB5237667330069B97C /* SettingsScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenViewController.swift; sourceTree = "<group>"; };
+		B10F5EB9237679FF0069B97C /* NotesEditorScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesEditorScreenViewController.swift; sourceTree = "<group>"; };
 		B18093DA2376375A00C650D7 /* TasksScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksScreenViewController.swift; sourceTree = "<group>"; };
 		B18093DC2376396500C650D7 /* LoginScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
 		B18093DE2376447D00C650D7 /* SignInScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreenViewController.swift; sourceTree = "<group>"; };
@@ -88,8 +94,11 @@
 				B1F1814D2375FFD100FD29AA /* SplashViewController.swift */,
 				B18093DC2376396500C650D7 /* LoginScreenViewController.swift */,
 				B18093DE2376447D00C650D7 /* SignInScreenViewController.swift */,
-				B1E5CBA823765725001DF426 /* SignUpScreenViewController.swift */,
+				B10F5EB5237667330069B97C /* SettingsScreenViewController.swift */,
 				B18093DA2376375A00C650D7 /* TasksScreenViewController.swift */,
+				B1E5CBA823765725001DF426 /* SignUpScreenViewController.swift */,
+				B10F5EB3237667200069B97C /* NotesScreenViewController.swift */,
+				B10F5EB9237679FF0069B97C /* NotesEditorScreenViewController.swift */,
 				B18D84A72375D72700D4111C /* Assets.xcassets */,
 				B18D84AC2375D72700D4111C /* Info.plist */,
 			);
@@ -206,11 +215,14 @@
 			files = (
 				B1F1814E2375FFD100FD29AA /* SplashViewController.swift in Sources */,
 				B1E5CBA923765725001DF426 /* SignUpScreenViewController.swift in Sources */,
+				B10F5EB4237667200069B97C /* NotesScreenViewController.swift in Sources */,
 				B18D84A32375D72500D4111C /* RootViewController.swift in Sources */,
 				B18D84A12375D72500D4111C /* AppDelegate.swift in Sources */,
+				B10F5EB6237667330069B97C /* SettingsScreenViewController.swift in Sources */,
 				B18093DD2376396500C650D7 /* LoginScreenViewController.swift in Sources */,
 				B18093DF2376447D00C650D7 /* SignInScreenViewController.swift in Sources */,
 				B18093DB2376375A00C650D7 /* TasksScreenViewController.swift in Sources */,
+				B10F5EBA237679FF0069B97C /* NotesEditorScreenViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,7 +15,7 @@ class SignUpScreenViewController: UIViewController {
         view.backgroundColor = .white
         // Do any additional setup after loading the view.
         
-        let textField = UITextView(frame: CGRect(x: 0, y: 0, width: 400, height: 400))
+        let textField = UITextView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
         
         textField.text = """
                             Sorry, this option is unavailable.

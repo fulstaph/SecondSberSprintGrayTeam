@@ -40,7 +40,7 @@ class SplashViewController: UIViewController {
     func onStartButtonTapped() {
         let loggedIn = UserDefaults.standard.bool(forKey: "LOGGED_IN")
         if loggedIn {
-            AppDelegate.shared.rootViewController.showTasksScreen()
+            AppDelegate.shared.rootViewController.switchToTaskScreen()
         } else {
             AppDelegate.shared.rootViewController.showLogInScreen()
         }

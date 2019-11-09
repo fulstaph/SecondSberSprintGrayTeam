@@ -37,6 +37,8 @@ class SignInScreenViewController: UIViewController {
     @objc
     func onLogInButtonPressed() {
         // to do
+        UserDefaults.standard.set(true, forKey: "LOGGED_IN")
+        AppDelegate.shared.rootViewController.switchToTaskScreen()
     }
     
     

@@ -83,6 +83,30 @@ class RootViewController: UIViewController {
         animateDismissTransition(to: logoutScreen)
     }
     
+    func switchToTaskScreen() {
+        let tabBarVC = UITabBarController()
+        let taskVC = TasksScreenViewController()
+        let notesVC = NotesScreenViewController()
+        let settingsVC = SettingsScreenViewController()
+        tabBarVC.viewControllers = [taskVC, notesVC, settingsVC]
+        
+        let taskNavigationController = UINavigationController()
+        taskNavigationController.viewControllers = [tabBarVC]
+        animateFadeTransition(to: taskNavigationController)
+    }
+    
+    func switchToNotesScreen() {
+        let noteVC = NotesScreenViewController()
+        let noteScreen = UINavigationController(rootViewController: noteVC)
+        animateDismissTransition(to: noteScreen)
+    }
+    
+    func switchToNoteEditScreen() {
+        let noteEditVC = NotesEditorScreenViewController()
+        let noteEditScreen = UINavigationController(rootViewController: noteEditVC)
+        animateFadeTransition(to: noteEditScreen)
+    }
+    
     private func animateFadeTransition(to new: UIViewController, completion: (() -> Void)? = nil) {
         current.willMove(toParent: nil)
         addChild(new)
