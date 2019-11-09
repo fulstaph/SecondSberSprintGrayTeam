@@ -15,17 +15,26 @@ class NotesScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        self.title = "Notes"
+        //self.title = "Notes"
         
         // Do any additional setup after loading the view.
 //        let title = UIBarButtonItem(title: "Notes: \(noteNum)", style: .plain, target: self, action: #selector(barTitle))
          // you will probably need to move it into viewWillAppear
         
-        let newNoteButton = UIBarButtonItem(title: "new", style: .plain, target: self, action: #selector(onNewNoteButtonTapped))
+        let newNoteButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onNewNoteButtonTapped))
         self.tabBarController?.navigationItem.setRightBarButton(newNoteButton, animated: true)
     }
     
 
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        self.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "note"), tag: 2)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     @objc
     func onNewNoteButtonTapped(){
         navigationController?.pushViewController(NotesEditorScreenViewController(), animated: true)

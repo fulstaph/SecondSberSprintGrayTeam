@@ -12,7 +12,7 @@ class NotesEditorScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .white
         // Do any additional setup after loading the view.
         let backButton = UIBarButtonItem(title: "back", style: .plain, target: self, action: #selector(onBackButtonTapped))
         navigationItem.setLeftBarButton(backButton, animated: true)
@@ -20,10 +20,11 @@ class NotesEditorScreenViewController: UIViewController {
         let saveButton = UIBarButtonItem(title: "save", style: .plain, target: self, action: #selector(onSaveButtonTapped))
         navigationItem.setRightBarButton(saveButton, animated: true)
         
-        let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+        let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
+        textField.layer.cornerRadius = 20
         textField.center = view.center
         textField.textAlignment = .center
-        textField.backgroundColor = .gray
+        textField.backgroundColor = .lightGray
         view.addSubview(textField)
     }
     
