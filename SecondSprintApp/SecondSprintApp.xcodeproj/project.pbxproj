@@ -17,6 +17,9 @@
 		B18D84A32375D72500D4111C /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D84A22375D72500D4111C /* RootViewController.swift */; };
 		B18D84A82375D72700D4111C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B18D84A72375D72700D4111C /* Assets.xcassets */; };
 		B18D84B62375D72700D4111C /* SecondSprintAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D84B52375D72700D4111C /* SecondSprintAppTests.swift */; };
+		B1B4E5E6237B4C6900199F8E /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B4E5E5237B4C6900199F8E /* Board.swift */; };
+		B1B4E5E8237B4D8F00199F8E /* MyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B4E5E7237B4D8F00199F8E /* MyCollectionViewCell.swift */; };
+		B1B4E5EA237B4F8400199F8E /* MyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B4E5E9237B4F8400199F8E /* MyTableViewCell.swift */; };
 		B1E5CBA923765725001DF426 /* SignUpScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E5CBA823765725001DF426 /* SignUpScreenViewController.swift */; };
 		B1F1814E2375FFD100FD29AA /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F1814D2375FFD100FD29AA /* SplashViewController.swift */; };
 /* End PBXBuildFile section */
@@ -46,6 +49,9 @@
 		B18D84B12375D72700D4111C /* SecondSprintAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SecondSprintAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B18D84B52375D72700D4111C /* SecondSprintAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondSprintAppTests.swift; sourceTree = "<group>"; };
 		B18D84B72375D72700D4111C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B1B4E5E5237B4C6900199F8E /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		B1B4E5E7237B4D8F00199F8E /* MyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionViewCell.swift; sourceTree = "<group>"; };
+		B1B4E5E9237B4F8400199F8E /* MyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTableViewCell.swift; sourceTree = "<group>"; };
 		B1E5CBA823765725001DF426 /* SignUpScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreenViewController.swift; sourceTree = "<group>"; };
 		B1F1814D2375FFD100FD29AA /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -96,8 +102,11 @@
 				B18093DE2376447D00C650D7 /* SignInScreenViewController.swift */,
 				B10F5EB5237667330069B97C /* SettingsScreenViewController.swift */,
 				B18093DA2376375A00C650D7 /* TasksScreenViewController.swift */,
+				B1B4E5E7237B4D8F00199F8E /* MyCollectionViewCell.swift */,
+				B1B4E5E9237B4F8400199F8E /* MyTableViewCell.swift */,
 				B1E5CBA823765725001DF426 /* SignUpScreenViewController.swift */,
 				B10F5EB3237667200069B97C /* NotesScreenViewController.swift */,
+				B1B4E5E5237B4C6900199F8E /* Board.swift */,
 				B10F5EB9237679FF0069B97C /* NotesEditorScreenViewController.swift */,
 				B18D84A72375D72700D4111C /* Assets.xcassets */,
 				B18D84AC2375D72700D4111C /* Info.plist */,
@@ -215,8 +224,11 @@
 			files = (
 				B1F1814E2375FFD100FD29AA /* SplashViewController.swift in Sources */,
 				B1E5CBA923765725001DF426 /* SignUpScreenViewController.swift in Sources */,
+				B1B4E5E8237B4D8F00199F8E /* MyCollectionViewCell.swift in Sources */,
 				B10F5EB4237667200069B97C /* NotesScreenViewController.swift in Sources */,
 				B18D84A32375D72500D4111C /* RootViewController.swift in Sources */,
+				B1B4E5E6237B4C6900199F8E /* Board.swift in Sources */,
+				B1B4E5EA237B4F8400199F8E /* MyTableViewCell.swift in Sources */,
 				B18D84A12375D72500D4111C /* AppDelegate.swift in Sources */,
 				B10F5EB6237667330069B97C /* SettingsScreenViewController.swift in Sources */,
 				B18093DD2376396500C650D7 /* LoginScreenViewController.swift in Sources */,

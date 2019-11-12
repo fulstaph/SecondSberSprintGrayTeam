@@ -8,13 +8,50 @@
 
 import UIKit
 
-var noteNum: Int = 0
+
+class Notes: CustomStringConvertible {
+    var notes: [String] = []
+    var noteCount: Int {
+        return notes.count
+    }
+
+    var description: String {
+        return notes.description
+    }
+    
+    init() {
+    }
+    
+    public func addNote(withText text: String) {
+        notes.append(text)
+    }
+    
+    subscript(index: Int) -> String {
+        return notes[index]
+    }
+}
+
+final class NoteSingleton {
+    static let shared = NoteSingleton()
+    
+    var notes = Notes()
+    
+    private init() {
+        
+    }
+}
 
 class NotesScreenViewController: UIViewController {
-
+    
+    let tableView: UITableView = UITableView()
+    var safeArea: UILayoutGuide!
+    
+    var selectedIndex: Int = -1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+
         //self.title = "Notes"
         
         // Do any additional setup after loading the view.
@@ -23,6 +60,35 @@ class NotesScreenViewController: UIViewController {
         
         let newNoteButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onNewNoteButtonTapped))
         self.tabBarController?.navigationItem.setRightBarButton(newNoteButton, animated: true)
+        
+        //safeArea = view.layoutMarginsGuide
+        
+//        tableView.translatesAutoresizingMaskIntoConstraints = false
+//        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+//        tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+//        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+//        tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        //self.tableView = UITableView(frame: view.frame)
+        
+        
+        self.view.addSubview(tableView)
+        //tableView.frame = CGRect(x: 0, y: UIApplication.shared.statusBarFrame.size.height, width: view.frame.width, height: view.frame.height)
+        
+        
+        
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tableView.leftAnchor.constraint(equalTo:view.leftAnchor).isActive = true
+        tableView.rightAnchor.constraint(equalTo:view.rightAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo:view.bottomAnchor).isActive = true
+        
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "notesCell")
+        
+
     }
     
 
@@ -34,6 +100,7 @@ class NotesScreenViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     @objc
     func onNewNoteButtonTapped(){
@@ -49,7 +116,52 @@ class NotesScreenViewController: UIViewController {
     }
     */
     override func viewWillAppear(_ animated: Bool) {
-        self.tabBarController?.navigationItem.title = "Notes (\(noteNum))"
+        self.tabBarController?.navigationItem.title = "Notes (\(NoteSingleton.shared.notes.noteCount))"
         navigationController?.isNavigationBarHidden = false
+        //print(NoteSingleton.shared.notes)
+//        for i in 0..<NoteSingleton.shared.notes.noteCount {
+//            print(NoteSingleton.shared.notes[i])
+//        }
+        
+        tableView.reloadData()
     }
+}
+
+
+extension NotesScreenViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if NoteSingleton.shared.notes.noteCount == 0 { return 0 }
+        return NoteSingleton.shared.notes.noteCount
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "notesCell", for: indexPath)
+        cell.textLabel?.text = NoteSingleton.shared.notes[indexPath.row]
+        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.lineBreakMode = .byWordWrapping
+        //print(cell.textLabel?.text)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == selectedIndex {
+            return 85.0
+        } else {
+            return 50.0
+        }
+    }
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == selectedIndex {
+            selectedIndex = -1
+        } else {
+            selectedIndex = indexPath.row
+        }
+        tableView.reloadData()
+    }
+    
+    
 }

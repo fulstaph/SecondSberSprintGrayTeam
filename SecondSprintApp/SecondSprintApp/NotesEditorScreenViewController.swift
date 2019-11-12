@@ -10,6 +10,8 @@ import UIKit
 
 class NotesEditorScreenViewController: UIViewController {
 
+    let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -20,12 +22,12 @@ class NotesEditorScreenViewController: UIViewController {
         let saveButton = UIBarButtonItem(title: "save", style: .plain, target: self, action: #selector(onSaveButtonTapped))
         navigationItem.setRightBarButton(saveButton, animated: true)
         
-        let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
         textField.layer.cornerRadius = 20
         textField.center = view.center
         textField.textAlignment = .center
         textField.backgroundColor = .lightGray
         view.addSubview(textField)
+        
     }
     
     @objc
@@ -35,8 +37,10 @@ class NotesEditorScreenViewController: UIViewController {
     
     @objc
     func onSaveButtonTapped() {
-        noteNum += 1
+        let newNote = textField.text ?? ""
+        NoteSingleton.shared.notes.addNote(withText: newNote)
         navigationController?.popViewController(animated: true)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
