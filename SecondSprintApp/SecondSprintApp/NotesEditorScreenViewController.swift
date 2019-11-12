@@ -26,6 +26,7 @@ class NotesEditorScreenViewController: UIViewController {
         textField.center = view.center
         textField.textAlignment = .center
         textField.backgroundColor = .lightGray
+        
         view.addSubview(textField)
         
     }

@@ -138,7 +138,7 @@ extension NotesScreenViewController: UITableViewDataSource, UITableViewDelegate 
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "notesCell", for: indexPath)
         cell.textLabel?.text = NoteSingleton.shared.notes[indexPath.row]
         cell.textLabel?.numberOfLines = 0
-        cell.textLabel?.lineBreakMode = .byWordWrapping
+        cell.textLabel?.lineBreakMode = .byTruncatingTail
         //print(cell.textLabel?.text)
         return cell
     }
