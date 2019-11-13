@@ -13,6 +13,8 @@ class MyTableViewCell: UITableViewCell {
     public static let reuseId = "dkjsf"
     
     public let nameLabel = UILabel()
+    public var nameLabelisChecked = false
+    var indexOfCellToExpand: Int!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -21,7 +23,7 @@ class MyTableViewCell: UITableViewCell {
         nameLabel.center = self.contentView.center
         nameLabel.textAlignment = .center
         nameLabel.font = .systemFont(ofSize: 20)
-        nameLabel.numberOfLines = 3
+        nameLabel.numberOfLines = 0
         
         
         contentView.addSubview(nameLabel)

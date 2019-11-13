@@ -12,6 +12,11 @@ class MyCollectionViewCell: UICollectionViewCell {
     public static let reuseId = "dkjsf"
     
     
+    var expandedLabel: UILabel!
+    var indexOfCellToExpand = -1
+
+    
+    
     var tableView = UITableView()
     weak var parentVC: TasksScreenViewController?
     public var updateButton = UIButton()
@@ -22,24 +27,25 @@ class MyCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         
         super.init(frame: frame)
+        let footer: UIButton = {
+            let button = UIButton(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50))
+            button.setTitle("+ Добавить еще одну карточку", for:  .normal)
+            button.titleLabel?.font = .systemFont(ofSize: 14)
+            button.backgroundColor = .darkGray
+            button.addTarget(self, action: #selector(addTapped), for: .touchUpInside)
+            return button
+        }()
         self.backgroundColor = .white
         label.frame = contentView.frame
         label.font = UIFont.systemFont(ofSize: 50)
         label.textAlignment = .center
-        updateButton = UIButton(frame: CGRect(x: 0, y: 5, width: contentView.frame.width, height: 40))
-        updateButton.setTitle("Добавить", for:  .normal)
-        updateButton.backgroundColor = .darkGray
-        updateButton.addTarget(self, action: #selector(addTapped), for: .touchUpInside)
-        
-        tableView.frame = CGRect(x: 0, y: 55, width: contentView.frame.width, height: contentView.frame.height - 55)
-        
-        contentView.addSubview(updateButton)
+        tableView.frame = CGRect(x:0, y: 0, width: contentView.frame.width, height: contentView.frame.height)
         contentView.addSubview(tableView)
+        tableView.backgroundColor = .gray
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(MyTableViewCell.self, forCellReuseIdentifier: MyTableViewCell.reuseId)
-        
-        
+        tableView.tableFooterView = footer
     }
     
     required init?(coder: NSCoder) {
@@ -88,23 +94,32 @@ extension MyCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: MyTableViewCell.reuseId, for: indexPath) as! MyTableViewCell
+        var cell = tableView.dequeueReusableCell(withIdentifier: MyTableViewCell.reuseId, for: indexPath) as! MyTableViewCell
         let task =  board?.items[indexPath.row]
+        cell.backgroundColor = .white
         cell.nameLabel.text = task
+
         return cell
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        let cell = tableView.dequeueReusableCell(withIdentifier: MyTableViewCell.reuseId, for: indexPath) as! MyTableViewCell
+        
+        if indexPath.row == indexOfCellToExpand{
+            indexOfCellToExpand = -1
+        } else {
+            indexOfCellToExpand = indexPath.row
+        }
+        tableView.reloadData()
     }
     
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == indexOfCellToExpand {
+            return UITableView.automaticDimension
+        }
         return 100
     }
-    //
-    //    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-    //        return UITableView.automaticDimension
-    //    }
     
 }
