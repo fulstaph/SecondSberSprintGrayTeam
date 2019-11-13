@@ -45,24 +45,15 @@ class TasksScreenViewController: UIViewController {
     func setupAddButtonItem() {
         let addButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addListTapped(_:)))
         self.tabBarController?.navigationItem.rightBarButtonItem = addButtonItem
+
     }
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
-        
-        boards.append(Board(title: "Нужно сделать", items: ["LASKDJASKLDJASKLASJDKLASJDKSJKLDLASDJKLASDJKLASJDKASJDKLASJDKLASJDKLASDJKALSDJAKSDJASKLDJAKSLDJKALSDJKLASDJKALSDJAKSDJASKDJAKSDJKAJDAJDASLKDAJSLKDJASKLDJASKLDJKALSJDKLASJDKLASDJKLASDJSKLDJKASDJAKSLDJKASLDJAKSLDJASKLDASKLDJASKLDJKDJAKDJASKDASJDKASJDASKDASJKDKASLDJAKSDJKLDJKASLDJKALSDJASKDJASKDJKASDJKLASJKLASJKDASKDAKSJLDJADKLASDJAKLDASJKDAD", "Schema Design", "Storage Management", "Model Abstraction"]))
-        boards.append(Board(title: "В процессе", items: ["LASKDJASKLDJASKLASJDKLASJDKSJKLDLASDJKLASDJKLASJDKASJDKLASJDKLASJDKLASDJKALSDJAKSDJASKLDJAKSLDJKALSDJKLASDJKALSDJAKSDJASKDJAKSDJKAJDAJDASLKDAJSLKDJASKLDJASKLDJKALSJDKLASJDKLASDJKLASDJSKLDJKASDJAKSLDJKASLDJAKSLDJASKLDASKLDJASKLDJKDJAKDJASKDASJDKASJDASKDASJKDKASLDJAKSDJKLDJKASLDJKALSDJASKDJASKDJKASDJKLASJKLASJKDASKDAKSJLDJADKLASDJAKLDASJKDAD", "Schema Design", "Storage Management", "Model Abstraction"]))
-        boards.append(Board(title: "Готово", items: ["LASKDJASKLDJASKLASJDKLASJDKSJKLDLASDJKLASDJKLASJDKASJDKLASJDKLASJDKLASDJKALSDJAKSDJASKLDJAKSLDJKALSDJKLASDJKALSDJAKSDJASKDJAKSDJKAJDAJDASLKDAJSLKDJASKLDJASKLDJKALSJDKLASJDKLASDJKLASDJSKLDJKASDJAKSLDJKASLDJAKSLDJASKLDASKLDJASKLDJKDJAKDJASKDASJDKASJDASKDASJKDKASLDJAKSDJKLDJKASLDJKALSDJASKDJASKDJKASDJKLASJKLASJKDASKDAKSJLDJADKLASDJAKLDASJKDAD", "Schema Design", "Storage Management", "Model Abstraction"]))
-        
-        //        layout.itemSize = CGSize(width: 200, height: view.frame.height - 100)
-        //        layout.minimumInteritemSpacing = 100
-        //        layout.minimumLineSpacing = 10
+        boards.append(Board(title: "Нужно сделать", items: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "Schema Design", "Storage Management", "Model Abstraction"]))
+        boards.append(Board(title: "В процессе", items: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "Schema Design", "Storage Management", "Model Abstraction"]))
+        boards.append(Board(title: "Готово", items: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "Schema Design", "Storage Management", "Model Abstraction"]))
         layout.scrollDirection = .horizontal
-        
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
         collectionView.contentInset = UIEdgeInsets(top: 60, left: 0, bottom: 20, right: 40)
         collectionView.backgroundColor = .gray
@@ -75,7 +66,6 @@ class TasksScreenViewController: UIViewController {
         
         setupNavigationBar()
         updateCollectionViewItem(with: view.bounds.size)
-        
     }
     
     
@@ -121,10 +111,8 @@ extension TasksScreenViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCollectionViewCell.reuseId, for: indexPath) as! MyCollectionViewCell
-        
         cell.setup(with: boards[indexPath.row])
         cell.parentVC = self
-        
         return cell
         
     }
