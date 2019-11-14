@@ -15,6 +15,7 @@ class NotesEditorScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+
         // Do any additional setup after loading the view.
         let backButton = UIBarButtonItem(title: "back", style: .plain, target: self, action: #selector(onBackButtonTapped))
         navigationItem.setLeftBarButton(backButton, animated: true)
@@ -46,5 +47,16 @@ class NotesEditorScreenViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = false
+//        addNewNoteBtn()
     }
+    
+//    func addNewNoteBtn() {
+//        let newNoteButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onNewNoteButtonTapped))
+//        self.tabBarController?.navigationItem.setRightBarButton(newNoteButton, animated: true)
+//    }
+    
+//    @objc
+//    func onNewNoteButtonTapped(){
+//        navigationController?.pushViewController(NotesEditorScreenViewController(), animated: true)
+//    }
 }

@@ -48,6 +48,15 @@ class NotesScreenViewController: UIViewController {
     
     var selectedIndex: Int = -1
     
+    private func setupNavigationBarForNotes() {
+        setupNoteBtn()
+    }
+      
+    func setupNoteBtn() {
+        let noteButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onNewNoteButtonTapped))
+        self.tabBarController?.navigationItem.rightBarButtonItem = noteButton
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -58,8 +67,8 @@ class NotesScreenViewController: UIViewController {
 //        let title = UIBarButtonItem(title: "Notes: \(noteNum)", style: .plain, target: self, action: #selector(barTitle))
          // you will probably need to move it into viewWillAppear
         
-        let newNoteButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onNewNoteButtonTapped))
-        self.tabBarController?.navigationItem.setRightBarButton(newNoteButton, animated: true)
+//        let newNoteButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onNewNoteButtonTapped))
+//        self.tabBarController?.navigationItem.setRightBarButton(newNoteButton, animated: true)
         
         //safeArea = view.layoutMarginsGuide
         
@@ -122,7 +131,7 @@ class NotesScreenViewController: UIViewController {
 //        for i in 0..<NoteSingleton.shared.notes.noteCount {
 //            print(NoteSingleton.shared.notes[i])
 //        }
-        
+        setupNavigationBarForNotes()
         tableView.reloadData()
     }
 }

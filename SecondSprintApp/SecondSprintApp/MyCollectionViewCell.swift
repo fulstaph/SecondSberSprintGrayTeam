@@ -31,9 +31,8 @@ class MyCollectionViewCell: UICollectionViewCell {
             let button = UIButton(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50))
             button.setTitle("+ Добавить еще одну карточку", for:  .normal)
             button.titleLabel?.font = .systemFont(ofSize: 14)
-            button.backgroundColor = .white
-            button.setTitleColor(.blue, for: .normal)
-            button.setTitleColor(.black, for: .selected)
+            button.backgroundColor = .lightGray
+            button.setTitleColor(.black, for: .normal)
             button.addTarget(self, action: #selector(addTapped), for: .touchUpInside)
             return button
         }()
@@ -44,7 +43,7 @@ class MyCollectionViewCell: UICollectionViewCell {
         tableView.frame = CGRect(x:0, y: 0, width: contentView.frame.width, height: contentView.frame.height)
         contentView.addSubview(tableView)
 //        tableView.layer.cornerRadius = 10
-        tableView.backgroundColor = .lightGray
+        tableView.backgroundColor = .gray
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(MyTableViewCell.self, forCellReuseIdentifier: MyTableViewCell.reuseId)
