@@ -35,7 +35,6 @@ final class NoteSingleton {
     static let shared = NoteSingleton()
     
     var notes = Notes()
-    
     private init() {
         
     }
@@ -48,6 +47,16 @@ class NotesScreenViewController: UIViewController {
     
     var selectedIndex: Int = -1
     
+    
+    private func setupNavigationBarForNotes() {
+        setupNoteBtn()
+    }
+      
+    func setupNoteBtn() {
+        let noteButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onNewNoteButtonTapped))
+        self.tabBarController?.navigationItem.rightBarButtonItem = noteButton
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -57,38 +66,20 @@ class NotesScreenViewController: UIViewController {
         // Do any additional setup after loading the view.
 //        let title = UIBarButtonItem(title: "Notes: \(noteNum)", style: .plain, target: self, action: #selector(barTitle))
          // you will probably need to move it into viewWillAppear
-        
-        let newNoteButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onNewNoteButtonTapped))
-        self.tabBarController?.navigationItem.setRightBarButton(newNoteButton, animated: true)
-        
-        //safeArea = view.layoutMarginsGuide
-        
-//        tableView.translatesAutoresizingMaskIntoConstraints = false
-//        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-//        tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-//        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-//        tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        //self.tableView = UITableView(frame: view.frame)
-        
-        
+
         self.view.addSubview(tableView)
-        //tableView.frame = CGRect(x: 0, y: UIApplication.shared.statusBarFrame.size.height, width: view.frame.width, height: view.frame.height)
-        
-        
-        
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo:view.leftAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo:view.rightAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo:view.bottomAnchor).isActive = true
+        tableView.heightAnchor.constraint(greaterThanOrEqualToConstant: 100).isActive = true
+
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "notesCell")
-        
-
+        self.tableView.register(MySecondTableViewCell.self, forCellReuseIdentifier: "notesCell")
     }
     
 
@@ -118,11 +109,7 @@ class NotesScreenViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.navigationItem.title = "Notes (\(NoteSingleton.shared.notes.noteCount))"
         navigationController?.isNavigationBarHidden = false
-        //print(NoteSingleton.shared.notes)
-//        for i in 0..<NoteSingleton.shared.notes.noteCount {
-//            print(NoteSingleton.shared.notes[i])
-//        }
-        
+        setupNavigationBarForNotes()
         tableView.reloadData()
     }
 }
@@ -135,21 +122,11 @@ extension NotesScreenViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "notesCell", for: indexPath)
-        cell.textLabel?.text = NoteSingleton.shared.notes[indexPath.row]
-        cell.textLabel?.numberOfLines = 0
-        cell.textLabel?.lineBreakMode = .byTruncatingTail
-        //print(cell.textLabel?.text)
+        let cell = tableView.dequeueReusableCell(withIdentifier: MySecondTableViewCell.reuseIdOfCell, for: indexPath) as! MySecondTableViewCell
+        cell.nameLabelSecond.text = NoteSingleton.shared.notes[indexPath.row]
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == selectedIndex {
-            return 85.0
-        } else {
-            return 50.0
-        }
-    }
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }
@@ -163,5 +140,57 @@ extension NotesScreenViewController: UITableViewDataSource, UITableViewDelegate 
         tableView.reloadData()
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == selectedIndex {
+            return UITableView.automaticDimension
+        }
+        return 100
+    }
     
+    
+}
+
+
+
+class MySecondTableViewCell: UITableViewCell {
+
+    public static let reuseIdOfCell = "notesCell"
+    
+    public let nameLabelSecond = UILabel()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        nameLabelSecond.frame = self.contentView.frame
+        nameLabelSecond.center = self.contentView.center
+        nameLabelSecond.textAlignment = .left
+        nameLabelSecond.font = .systemFont(ofSize: 20)
+        nameLabelSecond.numberOfLines = 0
+        
+        
+        contentView.addSubview(nameLabelSecond)
+        nameLabelSecond.translatesAutoresizingMaskIntoConstraints = false
+        nameLabelSecond.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0).isActive = true
+        nameLabelSecond.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
+        nameLabelSecond.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
+        nameLabelSecond.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0).isActive = true
+        nameLabelSecond.heightAnchor.constraint(greaterThanOrEqualToConstant: 100).isActive = true
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        // Configure the view for the selected state
+    }
+
 }

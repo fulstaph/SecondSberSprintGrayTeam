@@ -15,6 +15,7 @@ class NotesEditorScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+
         // Do any additional setup after loading the view.
         let backButton = UIBarButtonItem(title: "back", style: .plain, target: self, action: #selector(onBackButtonTapped))
         navigationItem.setLeftBarButton(backButton, animated: true)

@@ -12,10 +12,8 @@ class MyCollectionViewCell: UICollectionViewCell {
     public static let reuseId = "dkjsf"
     
     
-    var expandedLabel: UILabel!
+//    var expandedLabel: UILabel!
     var indexOfCellToExpand = -1
-
-    
     
     var tableView = UITableView()
     weak var parentVC: TasksScreenViewController?
@@ -31,9 +29,8 @@ class MyCollectionViewCell: UICollectionViewCell {
             let button = UIButton(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50))
             button.setTitle("+ Добавить еще одну карточку", for:  .normal)
             button.titleLabel?.font = .systemFont(ofSize: 14)
-            button.backgroundColor = .white
-            button.setTitleColor(.blue, for: .normal)
-            button.setTitleColor(.black, for: .selected)
+            button.backgroundColor = .lightGray
+            button.setTitleColor(.black, for: .normal)
             button.addTarget(self, action: #selector(addTapped), for: .touchUpInside)
             return button
         }()
@@ -44,7 +41,7 @@ class MyCollectionViewCell: UICollectionViewCell {
         tableView.frame = CGRect(x:0, y: 0, width: contentView.frame.width, height: contentView.frame.height)
         contentView.addSubview(tableView)
 //        tableView.layer.cornerRadius = 10
-        tableView.backgroundColor = .lightGray
+        tableView.backgroundColor = .gray
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(MyTableViewCell.self, forCellReuseIdentifier: MyTableViewCell.reuseId)
@@ -96,20 +93,17 @@ extension MyCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         var cell = tableView.dequeueReusableCell(withIdentifier: MyTableViewCell.reuseId, for: indexPath) as! MyTableViewCell
         let task =  board?.items[indexPath.row]
         cell.backgroundColor = .white
 //        cell.layer.cornerRadius = 10
         cell.nameLabel.text = task
-
+//        cell.heightAnchor.constraint(greaterThanOrEqualToConstant: 100).isActive = true
         return cell
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.dequeueReusableCell(withIdentifier: MyTableViewCell.reuseId, for: indexPath) as! MyTableViewCell
-        
         if indexPath.row == indexOfCellToExpand{
             indexOfCellToExpand = -1
         } else {
@@ -118,12 +112,13 @@ extension MyCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
         tableView.reloadData()
     }
     
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == indexOfCellToExpand {
             return UITableView.automaticDimension
         }
         return 100
     }
+    
+    
     
 }
