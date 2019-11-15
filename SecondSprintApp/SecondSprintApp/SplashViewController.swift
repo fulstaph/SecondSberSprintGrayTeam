@@ -9,7 +9,9 @@
 import UIKit
 
 class SplashViewController: UIViewController {
-
+    
+    let startButton = UIButton(frame: CGRect(x: 0, y: 0, width: 150, height: 50))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -17,12 +19,14 @@ class SplashViewController: UIViewController {
         // if we're here it means we're not logged in
         
         // start button set-up
-        let startButton = UIButton(frame: CGRect(x: 0, y: 0, width: 150, height: 50))
+        
         startButton.center = view.center
         startButton.layer.cornerRadius = 20
         startButton.setTitle("Start!", for: .normal)
         startButton.setTitleColor(.black, for: .normal)
         startButton.backgroundColor = .blue
+        
+        
         startButton.addTarget(self, action: #selector(onStartButtonTapped), for: .touchUpInside)
         view.addSubview(startButton)
         
@@ -35,6 +39,11 @@ class SplashViewController: UIViewController {
         welcomeLabel.textAlignment = .center
         view.addSubview(welcomeLabel)
         
+    }
+  
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        startButton.tappped()
     }
     
     @objc
@@ -59,4 +68,19 @@ class SplashViewController: UIViewController {
     }
     */
 
+}
+
+extension UIButton {
+    func tappped() {
+        let tap = CASpringAnimation(keyPath: "transform.scale")
+        
+        tap.fromValue = 0.87
+        tap.toValue = 1.0
+        tap.autoreverses = true
+        tap.repeatCount = HUGE
+        tap.initialVelocity = 0.01
+        tap.speed = 0.5
+        
+        layer.add(tap,forKey: nil)
+    }
 }
