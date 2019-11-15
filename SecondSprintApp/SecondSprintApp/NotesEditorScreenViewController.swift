@@ -47,16 +47,5 @@ class NotesEditorScreenViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = false
-//        addNewNoteBtn()
     }
-    
-//    func addNewNoteBtn() {
-//        let newNoteButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onNewNoteButtonTapped))
-//        self.tabBarController?.navigationItem.setRightBarButton(newNoteButton, animated: true)
-//    }
-    
-//    @objc
-//    func onNewNoteButtonTapped(){
-//        navigationController?.pushViewController(NotesEditorScreenViewController(), animated: true)
-//    }
 }

@@ -13,8 +13,9 @@ class MyTableViewCell: UITableViewCell {
     public static let reuseId = "dkjsf"
     
     public let nameLabel = UILabel()
-    public var nameLabelisChecked = false
+//    public var nameLabelisChecked = false
     var indexOfCellToExpand: Int!
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -28,10 +29,11 @@ class MyTableViewCell: UITableViewCell {
         
         contentView.addSubview(nameLabel)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
-        nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5).isActive = true
-        nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0).isActive = true
+        nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0).isActive = true
+        nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0).isActive = true
         nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0).isActive = true
+        nameLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 100).isActive = true
     }
     
     required init?(coder: NSCoder) {

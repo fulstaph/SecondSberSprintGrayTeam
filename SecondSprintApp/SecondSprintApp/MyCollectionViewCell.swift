@@ -12,10 +12,8 @@ class MyCollectionViewCell: UICollectionViewCell {
     public static let reuseId = "dkjsf"
     
     
-    var expandedLabel: UILabel!
+//    var expandedLabel: UILabel!
     var indexOfCellToExpand = -1
-
-    
     
     var tableView = UITableView()
     weak var parentVC: TasksScreenViewController?
@@ -95,20 +93,17 @@ extension MyCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         var cell = tableView.dequeueReusableCell(withIdentifier: MyTableViewCell.reuseId, for: indexPath) as! MyTableViewCell
         let task =  board?.items[indexPath.row]
         cell.backgroundColor = .white
 //        cell.layer.cornerRadius = 10
         cell.nameLabel.text = task
-
+//        cell.heightAnchor.constraint(greaterThanOrEqualToConstant: 100).isActive = true
         return cell
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.dequeueReusableCell(withIdentifier: MyTableViewCell.reuseId, for: indexPath) as! MyTableViewCell
-        
         if indexPath.row == indexOfCellToExpand{
             indexOfCellToExpand = -1
         } else {
@@ -117,12 +112,13 @@ extension MyCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
         tableView.reloadData()
     }
     
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == indexOfCellToExpand {
             return UITableView.automaticDimension
         }
         return 100
     }
+    
+    
     
 }
