@@ -11,7 +11,7 @@ import UIKit
 class MyCollectionViewCell: UICollectionViewCell {
     public static let reuseId = "dkjsf"
     
-    
+    let boardData = TrelloBoardDataManagerSingleton.shared
 //    var expandedLabel: UILabel!
     var indexOfCellToExpand = -1
     
@@ -65,8 +65,13 @@ class MyCollectionViewCell: UICollectionViewCell {
             }
             
             data.items.append(text)
+            var id = ""
+            for lists in self.boardData.list! where lists.name == data.title {
+                id = lists.id
+            }
             let addedIndexPath = IndexPath(item: data.items.count - 1, section: 0)
-            
+            let card = TrelloCard(name: "New card", desc: text, idList: id)
+            self.boardData.addCard(card)
             self.tableView.insertRows(at: [addedIndexPath], with: .automatic)
             self.tableView.scrollToRow(at: addedIndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
         }))

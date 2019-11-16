@@ -14,4 +14,9 @@ class Board: Codable {
         self.title = title
         self.items = items
     }
+    
+    init() {
+        title = ""
+        items = []
+    }
 }

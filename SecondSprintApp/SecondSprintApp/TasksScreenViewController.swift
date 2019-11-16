@@ -16,7 +16,8 @@ class TasksScreenViewController: UIViewController {
     
     var boards: [Board] = []
     
-
+    var data = TrelloBoardDataManagerSingleton.shared
+    
     init() {
         super.init(nibName: nil, bundle: nil)
         self.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "task"), tag: 1)
@@ -50,9 +51,33 @@ class TasksScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        boards.append(Board(title: "Нужно сделать", items: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "Schema Design", "Storage Management", "Model Abstraction"]))
-        boards.append(Board(title: "В процессе", items: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "Schema Design", "Storage Management", "Model Abstraction"]))
-        boards.append(Board(title: "Готово", items: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "Schema Design", "Storage Management", "Model Abstraction"]))
+//        boards.append(Board(title: "Нужно сделать", items: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "Schema Design", "Storage Management", "Model Abstraction"]))
+//        boards.append(Board(title: "В процессе", items: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "Schema Design", "Storage Management", "Model Abstraction"]))
+//        boards.append(Board(title: "Готово", items: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "Schema Design", "Storage Management", "Model Abstraction"]))
+        
+
+        //print(data.board)
+        /*
+        data.initBoard()
+        data.initList()
+        data.initCards()
+        data.printBoard()
+        */
+        //data.printBoard()
+        print("\(data.list![0].id)")
+        
+        let list = data.list ?? []
+        let cards = data.cards ?? []
+        for item in list {
+            let newBoard = Board()
+            newBoard.title = item.name
+            for card in cards where item.id == card.idList {
+                newBoard.items.append(card.desc)
+            }
+            boards.append(newBoard)
+        }
+        
+        //collectionView.reloadData()
         layout.scrollDirection = .horizontal
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
         collectionView.contentInset = UIEdgeInsets(top: 60, left: 0, bottom: 20, right: 40)
