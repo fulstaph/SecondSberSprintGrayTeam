@@ -97,6 +97,70 @@ class NotesScreenViewController: UIViewController {
     func onNewNoteButtonTapped(){
         navigationController?.pushViewController(NotesEditorScreenViewController(), animated: true)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let satellite1 = UIView()
+        let satellite2 = UIView()
+        let satellite3 = UIView()
+        
+        let orbit1 = CAKeyframeAnimation(keyPath: "position")
+        let orbit2 = CAKeyframeAnimation(keyPath: "position")
+        let orbit3 = CAKeyframeAnimation(keyPath: "position")
+        
+        let orbitBounds1 = CGRect(x: 125, y: 125, width: 150, height: 150)
+        let orbitBounds2 = CGRect(x: 175, y: 175, width: 50, height: 50)
+        let orbitBounds3 = CGRect(x: 150, y: 150, width: 100, height: 100)
+        
+        let image1 = UIImage(named: "earth")
+        let imageView1 = UIImageView(image: image1)
+        imageView1.frame = CGRect(x: 200, y: 200, width: 20, height: 20)
+        
+        let image2 = UIImage(named: "satellite")
+        let imageView2 = UIImageView(image: image2)
+        imageView2.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        
+        let imageView3 = UIImageView(image: image2)
+        imageView3.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        
+        let imageView4 = UIImageView(image: image2)
+        imageView4.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        
+        view.addSubview(imageView1)
+        
+        orbit1.path = CGPath(ellipseIn: orbitBounds1, transform: nil)
+        orbit2.path = CGPath(ellipseIn: orbitBounds2, transform: nil)
+        orbit3.path = CGPath(ellipseIn: orbitBounds3, transform: nil)
+        
+        orbit1.duration = 4.8
+        orbit1.isAdditive = true
+        orbit1.repeatCount = HUGE
+        orbit1.calculationMode = .paced
+        
+        
+        orbit2.duration = 5
+        orbit2.isAdditive = true
+        orbit2.repeatCount = HUGE
+        orbit2.calculationMode = .paced
+        
+        orbit3.duration = 4.9
+        orbit3.isAdditive = true
+        orbit3.repeatCount = HUGE
+        orbit3.calculationMode = .paced
+        
+        satellite1.addSubview(imageView2)
+        satellite2.addSubview(imageView4)
+        satellite3.addSubview(imageView3)
+        
+        view.addSubview(satellite1)
+        view.addSubview(satellite2)
+        view.addSubview(satellite3)
+        satellite1.layer.add(orbit1,forKey: "orbit1")
+        satellite2.layer.add(orbit2,forKey: "orbit2")
+        satellite3.layer.add(orbit3,forKey: "orbit3" )
+
+    }
     /*
     // MARK: - Navigation
 
