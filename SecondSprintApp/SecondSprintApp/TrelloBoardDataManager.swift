@@ -73,21 +73,16 @@ class TrelloBoardDataManager {
         return URLSession(configuration: URLSessionConfiguration.default)
     }()
     
-    let dispatchGroup = DispatchGroup()
     
     init() {
-        initBoard()
-        initList()
-        initCards()
-        dispatchGroup.notify(queue: .main) {
-            //print(self.board!, self.list!, self.cards!)
-        }
+        self.initBoard()
+        self.initList()
+        self.initCards()
         sleep(2)
     }
     
     
     func initBoard() {
-        dispatchGroup.enter()
         let boardURL = URL(string: self.url + self.board_id + "?key=" + self.apiKey + "&token=" + self.token)!
         let request = URLRequest(url: boardURL,
                                  cachePolicy: .useProtocolCachePolicy,
@@ -95,18 +90,19 @@ class TrelloBoardDataManager {
         let task = self.session.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
             do {
                 let board = try JSONDecoder().decode(TrelloBoard.self, from: data!)
+                
                 self.board = board
-                self.dispatchGroup.leave()
+                
             } catch {
                 print(error)
             }
         })
+        
         task.resume()
 
     }
     
     func initList() {
-        dispatchGroup.enter()
         let listRequest = URLRequest(url: URL(string: self.url + self.board_id + "/lists?key=" + self.apiKey + "&token=" + self.token)!,
                                      cachePolicy: .useProtocolCachePolicy,
                                      timeoutInterval: 60)
@@ -114,7 +110,6 @@ class TrelloBoardDataManager {
             do {
                 let list = try JSONDecoder().decode([TrelloListItem].self, from: data!)
                 self.list = list
-                self.dispatchGroup.leave()
                 //print(list)
             } catch {
                 print(error)
@@ -126,7 +121,6 @@ class TrelloBoardDataManager {
     
     
     func initCards() {
-        dispatchGroup.enter()
         let cardRequest = URLRequest(url: URL(string: self.url + self.board_id + "/cards?key=" + self.apiKey + "&token=" + self.token)!,
                                      cachePolicy: .useProtocolCachePolicy,
                                      timeoutInterval: 60)
@@ -134,7 +128,7 @@ class TrelloBoardDataManager {
             do {
                 let cards = try JSONDecoder().decode([TrelloCard].self, from: data!)
                 self.cards = cards
-                self.dispatchGroup.leave()
+   
                 //print(cards)
             } catch {
                 print(error)
