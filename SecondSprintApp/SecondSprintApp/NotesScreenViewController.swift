@@ -101,6 +101,11 @@ class NotesScreenViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+
+        downloadAnimation()
+    }
+
+    private func downloadAnimation() {
         let satellite1 = UIView()
         let satellite2 = UIView()
         let satellite3 = UIView()
@@ -116,17 +121,18 @@ class NotesScreenViewController: UIViewController {
         let image1 = UIImage(named: "earth")
         let imageView1 = UIImageView(image: image1)
         imageView1.frame = CGRect(x: 200, y: 200, width: 20, height: 20)
+        //imageView1.center = view.center
         
         let image2 = UIImage(named: "satellite")
         let imageView2 = UIImageView(image: image2)
         imageView2.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-        
+        //imageView2.center = view.center
         let imageView3 = UIImageView(image: image2)
         imageView3.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-        
+        //imageView3.center = view.center
         let imageView4 = UIImageView(image: image2)
         imageView4.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-        
+        //imageView4.center = view.center
         view.addSubview(imageView1)
         
         orbit1.path = CGPath(ellipseIn: orbitBounds1, transform: nil)
@@ -159,17 +165,8 @@ class NotesScreenViewController: UIViewController {
         satellite1.layer.add(orbit1,forKey: "orbit1")
         satellite2.layer.add(orbit2,forKey: "orbit2")
         satellite3.layer.add(orbit3,forKey: "orbit3" )
-
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.navigationItem.title = "Notes (\(NoteSingleton.shared.notes.noteCount))"
         navigationController?.isNavigationBarHidden = false
