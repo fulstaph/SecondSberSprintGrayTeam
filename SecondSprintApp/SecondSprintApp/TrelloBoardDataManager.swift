@@ -78,7 +78,7 @@ class TrelloBoardDataManager {
         self.initBoard()
         self.initList()
         self.initCards()
-        sleep(2)
+        //sleep(2)
     }
     
     

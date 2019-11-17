@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SecondSprintApp/TrelloBoardDataManager.swift"
-            timestampString = "595711365.7343839"
+            timestampString = "595721482.179667"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "59"
@@ -38,16 +38,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SecondSprintApp/TrelloBoardDataManager.swift"
-            timestampString = "595711365.790759"
+            timestampString = "595721482.18731"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
-            landmarkName = "printBoard()"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
+            landmarkName = "initCards()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SecondSprintApp/TrelloBoardDataManager.swift"
-            timestampString = "595711365.7917989"
+            timestampString = "595721482.1876791"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "64"
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SecondSprintApp/TrelloBoardDataManager.swift"
-            timestampString = "595711365.792817"
+            timestampString = "595721482.1879669"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "69"
