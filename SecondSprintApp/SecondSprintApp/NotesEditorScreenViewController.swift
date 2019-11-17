@@ -10,7 +10,7 @@ import UIKit
 
 class NotesEditorScreenViewController: UIViewController {
 
-    let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+    let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 300, height: 50))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,11 +23,13 @@ class NotesEditorScreenViewController: UIViewController {
         let saveButton = UIBarButtonItem(title: "save", style: .plain, target: self, action: #selector(onSaveButtonTapped))
         navigationItem.setRightBarButton(saveButton, animated: true)
         
-        textField.layer.cornerRadius = 20
+        textField.layer.cornerRadius = 10
         textField.center = view.center
-        textField.textAlignment = .center
+        textField.textAlignment = .left
         textField.backgroundColor = .lightGray
+        textField.borderStyle = .roundedRect
         
+        textField.layer.borderColor = UIColor.black.cgColor
         view.addSubview(textField)
         
     }

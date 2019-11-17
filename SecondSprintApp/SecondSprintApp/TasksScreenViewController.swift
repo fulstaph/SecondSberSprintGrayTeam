@@ -66,13 +66,6 @@ class TasksScreenViewController: UIViewController {
             self.downloadLabel.text = self.downloadLabel.text! + "."
             self.downloadLabel.fadeTransition(1.0)
             self.downloadLabel.text = self.downloadLabel.text! + "."
-            self.downloadLabel.fadeTransition(1.0)
-            self.downloadLabel.text = self.downloadLabel.text! + "."
-            self.downloadLabel.fadeTransition(1.0)
-            self.downloadLabel.text = self.downloadLabel.text! + "."
-            self.downloadLabel.fadeTransition(1.0)
-            self.downloadLabel.text = self.downloadLabel.text! + "."
-            self.downloadLabel.fadeTransition(1.0)
             UIView.animate(withDuration: 3.5) {
                 self.planet.alpha = 0.0
                 self.spaceship.alpha = 0.0
@@ -143,7 +136,7 @@ class TasksScreenViewController: UIViewController {
         downloadLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 180, height: 40))
         downloadLabel.font = .boldSystemFont(ofSize: 20)
         downloadLabel.text = "Downloading"
-        downloadLabel.textAlignment = .left
+        downloadLabel.textAlignment = .center
         downloadLabel.center = view.center
         downloadLabel.center.y += 200
         downloadLabel.layer.borderColor = UIColor.darkGray.cgColor
