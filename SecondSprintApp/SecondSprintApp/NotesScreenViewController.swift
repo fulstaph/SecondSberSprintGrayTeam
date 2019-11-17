@@ -232,8 +232,11 @@ class MySecondTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        containerForImage.backgroundColor = .black
+        containerForImage.backgroundColor = .clear
         containerForImage.clipsToBounds = true
+        containerForImage.layer.cornerRadius = 10
+        containerForImage.layer.contentsScale = 2.0
+        containerForImage.layer.borderColor = UIColor.darkGray.cgColor
         textOfNote.textAlignment = .left
         textOfNote.font = .systemFont(ofSize: 20)
         textOfNote.numberOfLines = 0
