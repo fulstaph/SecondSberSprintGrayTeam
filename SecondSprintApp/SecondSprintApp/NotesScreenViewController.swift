@@ -11,6 +11,7 @@ import UIKit
 
 class Notes: CustomStringConvertible {
     var notes: [String] = []
+    var images: [UIImage] = []
     var noteCount: Int {
         return notes.count
     }
@@ -22,8 +23,9 @@ class Notes: CustomStringConvertible {
     init() {
     }
     
-    public func addNote(withText text: String) {
+    public func addNote(withText text: String, withImage image: UIImage) {
         notes.append(text)
+        images.append(image)
     }
     
     subscript(index: Int) -> String {
@@ -45,70 +47,6 @@ class NotesScreenViewController: UIViewController {
     let tableView: UITableView = UITableView()
     var safeArea: UILayoutGuide!
     var selectedIndex: Int = -1
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-//        let satellite1 = UIView()
-//        let satellite2 = UIView()
-//        let satellite3 = UIView()
-//
-//        let orbit1 = CAKeyframeAnimation(keyPath: "position")
-//        let orbit2 = CAKeyframeAnimation(keyPath: "position")
-//        let orbit3 = CAKeyframeAnimation(keyPath: "position")
-//
-//        let orbitBounds1 = CGRect(x: 125, y: 125, width: 150, height: 150)
-//        let orbitBounds2 = CGRect(x: 175, y: 175, width: 50, height: 50)
-//        let orbitBounds3 = CGRect(x: 150, y: 150, width: 100, height: 100)
-//
-//        let image1 = UIImage(named: "earth")
-//        let imageView1 = UIImageView(image: image1)
-//        imageView1.frame = CGRect(x: 200, y: 200, width: 20, height: 20)
-//
-//        let image2 = UIImage(named: "satellite")
-//        let imageView2 = UIImageView(image: image2)
-//        imageView2.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-//
-//        let imageView3 = UIImageView(image: image2)
-//        imageView3.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-//
-//        let imageView4 = UIImageView(image: image2)
-//        imageView4.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-//
-//        view.addSubview(imageView1)
-//
-//        orbit1.path = CGPath(ellipseIn: orbitBounds1, transform: nil)
-//        orbit2.path = CGPath(ellipseIn: orbitBounds2, transform: nil)
-//        orbit3.path = CGPath(ellipseIn: orbitBounds3, transform: nil)
-//
-//        orbit1.duration = 4.8
-//        orbit1.isAdditive = true
-//        orbit1.repeatCount = HUGE
-//        orbit1.calculationMode = .paced
-//
-//
-//        orbit2.duration = 5
-//        orbit2.isAdditive = true
-//        orbit2.repeatCount = HUGE
-//        orbit2.calculationMode = .paced
-//
-//        orbit3.duration = 4.9
-//        orbit3.isAdditive = true
-//        orbit3.repeatCount = HUGE
-//        orbit3.calculationMode = .paced
-//
-//        satellite1.addSubview(imageView2)
-//        satellite2.addSubview(imageView4)
-//        satellite3.addSubview(imageView3)
-//
-//        view.addSubview(satellite1)
-//        view.addSubview(satellite2)
-//        view.addSubview(satellite3)
-//        satellite1.layer.add(orbit1,forKey: "orbit1")
-//        satellite2.layer.add(orbit2,forKey: "orbit2")
-//        satellite3.layer.add(orbit3,forKey: "orbit3" )
-
-    }
  
     private func setupNavigationBarForNotes() {
         setupNoteBtn()
@@ -186,7 +124,6 @@ extension NotesScreenViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MySecondTableViewCell.reuseIdOfCell, for: indexPath) as! MySecondTableViewCell
         cell.textOfNote.text = NoteSingleton.shared.notes[indexPath.row]
-//        cell.containerForImage.text = "LOL"
         return cell
     }
     
@@ -220,7 +157,7 @@ class MySecondTableViewCell: UITableViewCell {
     public static let reuseIdOfCell = "notesCell"
     
     public let textOfNote = UILabel()
-    public let imageOfNote = UIImage()
+//    public let imageOfNote = UIImage()
     public let containerForImage = UIView()
   
 //    let containerForImage: UIView = {
@@ -232,17 +169,15 @@ class MySecondTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        containerForImage.backgroundColor = .clear
+        containerForImage.backgroundColor = .black
         containerForImage.clipsToBounds = true
-        containerForImage.layer.cornerRadius = 10
-        containerForImage.layer.contentsScale = 2.0
-        containerForImage.layer.borderColor = UIColor.darkGray.cgColor
         textOfNote.textAlignment = .left
         textOfNote.font = .systemFont(ofSize: 20)
         textOfNote.numberOfLines = 0
         
         contentView.addSubview(textOfNote)
         contentView.addSubview(containerForImage)
+
         
         containerForImage.translatesAutoresizingMaskIntoConstraints = false
         textOfNote.translatesAutoresizingMaskIntoConstraints = false
@@ -257,6 +192,11 @@ class MySecondTableViewCell: UITableViewCell {
         textOfNote.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
         textOfNote.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0).isActive = true
         textOfNote.heightAnchor.constraint(greaterThanOrEqualToConstant: 30).isActive = true
+        
+//        imageOfNote.topAnchor.constraint(equalTo: containerForImage.bottomAnchor, constant: 0).isActive = true
+//        imageOfNote.trailingAnchor.constraint(equalTo: containerForImage.trailingAnchor, constant: 0).isActive = true
+//        imageOfNote.leadingAnchor.constraint(equalTo: containerForImage.leadingAnchor, constant: 0).isActive = true
+//        imageOfNote.bottomAnchor.constraint(equalTo: containerForImage.bottomAnchor, constant: 0).isActive = true
         
 //        let satellite1 = UIView()
         let satellite2 = UIView()
@@ -300,24 +240,10 @@ class MySecondTableViewCell: UITableViewCell {
         orbit2.isAdditive = true
         orbit2.repeatCount = HUGE
         orbit2.calculationMode = .paced
-
-//        orbit3.duration = 4.9
-//        orbit3.isAdditive = true
-//        orbit3.repeatCount = HUGE
-//        orbit3.calculationMode = .paced
-        
-//        satellite1.addSubview(imageView2)
         satellite2.addSubview(imageView4)
-//        satellite3.addSubview(imageView3)
         
-//        containerForImage.addSubview(satellite1)
         containerForImage.addSubview(satellite2)
-//        containerForImage.addSubview(satellite3)
-//        satellite1.layer.add(orbit1,forKey: "orbit1")
         satellite2.layer.add(orbit2,forKey: "orbit2")
-//        satellite3.layer.add(orbit3,forKey: "orbit3" )
-        
-        
     }
     
     required init?(coder: NSCoder) {
