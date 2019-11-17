@@ -23,7 +23,7 @@ class SplashViewController: UIViewController {
         startButton.center = view.center
         startButton.layer.cornerRadius = 20
         startButton.setTitle("Start!", for: .normal)
-        startButton.setTitleColor(.black, for: .normal)
+        startButton.setTitleColor(.white, for: .normal)
         startButton.backgroundColor = .blue
         
         

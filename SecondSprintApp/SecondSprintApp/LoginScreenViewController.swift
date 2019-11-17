@@ -28,7 +28,7 @@ class LoginScreenViewController: UIViewController {
         signInButton.center = CGPoint(x: x, y: y + 50)
         signInButton.layer.cornerRadius = 20
         signInButton.setTitle("Sign in", for: .normal)
-        signInButton.setTitleColor(.black, for: .normal)
+        signInButton.setTitleColor(.white, for: .normal)
         signInButton.backgroundColor = .blue
         signInButton.addTarget(self, action: #selector(onSignInButtonTapped), for: .touchUpInside)
         view.addSubview(signInButton)
@@ -38,7 +38,7 @@ class LoginScreenViewController: UIViewController {
         signUpButton.center = CGPoint(x: x, y: y + 120)
         signUpButton.layer.cornerRadius = 20
         signUpButton.setTitle("Sign up", for: .normal)
-        signUpButton.setTitleColor(.black, for: .normal)
+        signUpButton.setTitleColor(.white, for: .normal)
         signUpButton.backgroundColor = .blue
         signUpButton.addTarget(self, action: #selector(onSignUpButtonTapped), for: .touchUpInside)
         view.addSubview(signUpButton)

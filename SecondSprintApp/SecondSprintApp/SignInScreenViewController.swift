@@ -25,7 +25,7 @@ class SignInScreenViewController: UIViewController {
         logInButton.center = CGPoint(x: x, y: y)
         logInButton.layer.cornerRadius = 20
         logInButton.setTitle("Press the button", for: .normal)
-        logInButton.setTitleColor(.black, for: .normal)
+        logInButton.setTitleColor(.white, for: .normal)
         logInButton.backgroundColor = .blue
         logInButton.addTarget(self, action: #selector(onLogInButtonPressed), for: .touchUpInside)
         view.addSubview(logInButton)

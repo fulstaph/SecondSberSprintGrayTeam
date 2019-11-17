@@ -18,6 +18,7 @@ class SettingsScreenViewController: UIViewController {
         
         let signOutButton = UIButton(frame: CGRect(x: 0, y: 0, width: 150, height: 50))
         signOutButton.setTitle("Sign out", for: .normal)
+        signOutButton.setTitleColor(.white, for: .normal)
         signOutButton.layer.cornerRadius = 20
         signOutButton.center = view.center
         signOutButton.backgroundColor = .blue
