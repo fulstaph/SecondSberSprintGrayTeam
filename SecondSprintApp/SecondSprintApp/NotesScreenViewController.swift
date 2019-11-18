@@ -48,6 +48,15 @@ class NotesScreenViewController: UIViewController {
     var safeArea: UILayoutGuide!
     var selectedIndex: Int = -1
  
+    let loadingIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        indicator.backgroundColor = .lightGray
+        indicator.layer.cornerRadius = 3
+        indicator.style = .white
+        indicator.color = .white
+        return indicator
+    }()
+    
     private func setupNavigationBarForNotes() {
         setupNoteBtn()
     }
@@ -195,58 +204,6 @@ class MySecondTableViewCell: UITableViewCell {
         textOfNote.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
         textOfNote.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0).isActive = true
         textOfNote.heightAnchor.constraint(greaterThanOrEqualToConstant: 30).isActive = true
-        
-//        imageOfNote.topAnchor.constraint(equalTo: containerForImage.bottomAnchor, constant: 0).isActive = true
-//        imageOfNote.trailingAnchor.constraint(equalTo: containerForImage.trailingAnchor, constant: 0).isActive = true
-//        imageOfNote.leadingAnchor.constraint(equalTo: containerForImage.leadingAnchor, constant: 0).isActive = true
-//        imageOfNote.bottomAnchor.constraint(equalTo: containerForImage.bottomAnchor, constant: 0).isActive = true
-        
-//        let satellite1 = UIView()
-        let satellite2 = UIView()
-//        let satellite3 = UIView()
-        
-//        let orbit1 = CAKeyframeAnimation(keyPath: "position")
-        let orbit2 = CAKeyframeAnimation(keyPath: "position")
-//        let orbit3 = CAKeyframeAnimation(keyPath: "position")
-        
-//        let orbitBounds1 = CGRect(x: 0, y: 0, width: 150, height: 150)
-        let orbitBounds2 = CGRect(x: -7, y: -7, width: 40, height: 40)
-//        let orbitBounds3 = CGRect(x: 0, y: 0, width: 100, height: 100)
-        
-        let image1 = UIImage(named: "earth")
-        let imageView1 = UIImageView(image: image1)
-        imageView1.frame = CGRect(x: 15, y: 15, width: 20, height: 20)
-        
-        let image2 = UIImage(named: "satellite")
-        let imageView2 = UIImageView(image: image2)
-        imageView2.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-        
-//        let imageView3 = UIImageView(image: image2)
-//        imageView3.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-//
-        let imageView4 = UIImageView(image: image2)
-        imageView4.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-        
-        containerForImage.addSubview(imageView1)
-        
-//        orbit1.path = CGPath(ellipseIn: orbitBounds1, transform: nil)
-        orbit2.path = CGPath(ellipseIn: orbitBounds2, transform: nil)
-//        orbit3.path = CGPath(ellipseIn: orbitBounds3, transform: nil)
-        
-//        orbit1.duration = 4.8
-//        orbit1.isAdditive = true
-//        orbit1.repeatCount = HUGE
-//        orbit1.calculationMode = .paced
-        
-        
-        orbit2.duration = 5
-        orbit2.isAdditive = true
-        orbit2.repeatCount = HUGE
-        orbit2.calculationMode = .paced
-        satellite2.addSubview(imageView4)
-        
-        containerForImage.addSubview(satellite2)
-        satellite2.layer.add(orbit2,forKey: "orbit2")
     }
     
     required init?(coder: NSCoder) {
