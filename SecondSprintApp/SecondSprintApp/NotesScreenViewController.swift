@@ -42,12 +42,21 @@ final class NoteSingleton {
     }
 }
 
+let loadingIndicator: UIActivityIndicatorView = {
+    let indicator = UIActivityIndicatorView(frame: CGRect(x: 30, y: 20, width: 30, height: 30))
+    indicator.backgroundColor = #colorLiteral(red: 0.5846411586, green: 0.5811688304, blue: 0.5873122215, alpha: 0.7034193065)
+    indicator.layer.cornerRadius = 3
+    indicator.style = .white
+    indicator.color = .white
+    return indicator
+}()
+
 class NotesScreenViewController: UIViewController {
     
     let tableView: UITableView = UITableView()
     var safeArea: UILayoutGuide!
     var selectedIndex: Int = -1
- 
+    
     private func setupNavigationBarForNotes() {
         setupNoteBtn()
     }
@@ -123,10 +132,14 @@ extension NotesScreenViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MySecondTableViewCell.reuseIdOfCell, for: indexPath) as! MySecondTableViewCell
+        cell.contentView.addSubview(loadingIndicator)
+        loadingIndicator.startAnimating()
         tableView.beginUpdates()
         cell.textOfNote.text = NoteSingleton.shared.notes.notes[indexPath.row]
         cell.containerForImage.setImage(NoteSingleton.shared.notes.images[indexPath.row], for: .normal)
         tableView.endUpdates()
+//        loadingIndicator.stopAnimating()
+//        loadingIndicator.removeFromSuperview()
         return cell
     }
     
@@ -160,20 +173,13 @@ class MySecondTableViewCell: UITableViewCell {
     public static let reuseIdOfCell = "notesCell"
     
     public let textOfNote = UILabel()
-//    public let imageOfNote = UIImage()
     public let containerForImage = UIButton()
-  
-//    let containerForImage: UIView = {
-//        let view = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-//        view.backgroundColor = .red
-//        return view
-//    }()
-
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         containerForImage.backgroundColor = .lightGray
         containerForImage.clipsToBounds = true
+        containerForImage.layer.cornerRadius = 3
         textOfNote.textAlignment = .left
         textOfNote.font = .systemFont(ofSize: 20)
         textOfNote.numberOfLines = 0
@@ -195,58 +201,6 @@ class MySecondTableViewCell: UITableViewCell {
         textOfNote.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
         textOfNote.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0).isActive = true
         textOfNote.heightAnchor.constraint(greaterThanOrEqualToConstant: 30).isActive = true
-        
-//        imageOfNote.topAnchor.constraint(equalTo: containerForImage.bottomAnchor, constant: 0).isActive = true
-//        imageOfNote.trailingAnchor.constraint(equalTo: containerForImage.trailingAnchor, constant: 0).isActive = true
-//        imageOfNote.leadingAnchor.constraint(equalTo: containerForImage.leadingAnchor, constant: 0).isActive = true
-//        imageOfNote.bottomAnchor.constraint(equalTo: containerForImage.bottomAnchor, constant: 0).isActive = true
-        
-//        let satellite1 = UIView()
-        let satellite2 = UIView()
-//        let satellite3 = UIView()
-        
-//        let orbit1 = CAKeyframeAnimation(keyPath: "position")
-        let orbit2 = CAKeyframeAnimation(keyPath: "position")
-//        let orbit3 = CAKeyframeAnimation(keyPath: "position")
-        
-//        let orbitBounds1 = CGRect(x: 0, y: 0, width: 150, height: 150)
-        let orbitBounds2 = CGRect(x: -7, y: -7, width: 40, height: 40)
-//        let orbitBounds3 = CGRect(x: 0, y: 0, width: 100, height: 100)
-        
-        let image1 = UIImage(named: "earth")
-        let imageView1 = UIImageView(image: image1)
-        imageView1.frame = CGRect(x: 15, y: 15, width: 20, height: 20)
-        
-        let image2 = UIImage(named: "satellite")
-        let imageView2 = UIImageView(image: image2)
-        imageView2.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-        
-//        let imageView3 = UIImageView(image: image2)
-//        imageView3.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-//
-        let imageView4 = UIImageView(image: image2)
-        imageView4.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-        
-        containerForImage.addSubview(imageView1)
-        
-//        orbit1.path = CGPath(ellipseIn: orbitBounds1, transform: nil)
-        orbit2.path = CGPath(ellipseIn: orbitBounds2, transform: nil)
-//        orbit3.path = CGPath(ellipseIn: orbitBounds3, transform: nil)
-        
-//        orbit1.duration = 4.8
-//        orbit1.isAdditive = true
-//        orbit1.repeatCount = HUGE
-//        orbit1.calculationMode = .paced
-        
-        
-        orbit2.duration = 5
-        orbit2.isAdditive = true
-        orbit2.repeatCount = HUGE
-        orbit2.calculationMode = .paced
-        satellite2.addSubview(imageView4)
-        
-        containerForImage.addSubview(satellite2)
-        satellite2.layer.add(orbit2,forKey: "orbit2")
     }
     
     required init?(coder: NSCoder) {
