@@ -48,6 +48,18 @@ class NotesScreenViewController: UIViewController {
     var safeArea: UILayoutGuide!
     var selectedIndex: Int = -1
  
+    let data = FirebaseDataManager()
+    
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action:
+            #selector(self.handleRefresh(_:)),
+                                 for: UIControl.Event.valueChanged)
+        refreshControl.tintColor = UIColor.red
+        
+        return refreshControl
+    }()
+    
     private func setupNavigationBarForNotes() {
         setupNoteBtn()
     }
@@ -61,14 +73,11 @@ class NotesScreenViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
 
-        //self.title = "Notes"
         
-        // Do any additional setup after loading the view.
-//        let title = UIBarButtonItem(title: "Notes: \(noteNum)", style: .plain, target: self, action: #selector(barTitle))
-         // you will probably need to move it into viewWillAppear
-
+        
         self.view.addSubview(tableView)
-        
+        self.tableView.addSubview(self.refreshControl)
+
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo:view.leftAnchor).isActive = true
@@ -80,6 +89,12 @@ class NotesScreenViewController: UIViewController {
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.tableView.register(MySecondTableViewCell.self, forCellReuseIdentifier: "notesCell")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+            let notes = self.data.notes
+            for note in notes.values {
+                self.data.downloadImage(from: URL(string: note.imgUrl)!, with: note.text)
+            }
+        })
     }
     
 
@@ -97,20 +112,20 @@ class NotesScreenViewController: UIViewController {
     func onNewNoteButtonTapped(){
         navigationController?.pushViewController(NotesEditorScreenViewController(), animated: true)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
     override func viewWillAppear(_ animated: Bool) {
-        self.tabBarController?.navigationItem.title = "Notes (\(NoteSingleton.shared.notes.noteCount))"
-        navigationController?.isNavigationBarHidden = false
-        setupNavigationBarForNotes()
-        tableView.reloadData()
+
+
+            print(self.data.notes)
+            self.tabBarController?.navigationItem.title = "Notes (\(NoteSingleton.shared.notes.noteCount))"
+            self.navigationController?.isNavigationBarHidden = false
+            self.setupNavigationBarForNotes()
+            self.tableView.reloadData()
+    }
+    @objc
+    func handleRefresh(_ refreshControl: UIRefreshControl) {
+        self.tableView.reloadData()
+        refreshControl.endRefreshing()
     }
 }
 
