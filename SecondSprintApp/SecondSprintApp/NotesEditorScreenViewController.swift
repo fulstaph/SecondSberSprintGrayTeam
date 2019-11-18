@@ -9,7 +9,15 @@
 import UIKit
 
 class NotesEditorScreenViewController: UIViewController {
-
+    let loadingIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        indicator.backgroundColor = #colorLiteral(red: 0.5846411586, green: 0.5811688304, blue: 0.5873122215, alpha: 0.7034193065)
+        indicator.layer.cornerRadius = 3
+        indicator.style = .white
+        indicator.color = .white
+        return indicator
+    }()
+    
     let imageButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 20
@@ -66,6 +74,9 @@ class NotesEditorScreenViewController: UIViewController {
     
     @objc
     func showPicker() {
+        view.addSubview(loadingIndicator)
+        loadingIndicator.center = view.center
+        loadingIndicator.startAnimating()
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.sourceType = UIImagePickerController.SourceType.photoLibrary;
@@ -80,9 +91,11 @@ class NotesEditorScreenViewController: UIViewController {
     
     @objc
     func onSaveButtonTapped() {
+        loadingIndicator.startAnimating()
         let newNote = textField.text ?? ""
         guard let newImage = imageButton.imageView!.image else { return }
         NoteSingleton.shared.notes.addNote(withText: newNote, withImage: newImage)
+        loadingIndicator.stopAnimating()
         navigationController?.popViewController(animated: true)
     }
     
@@ -96,10 +109,13 @@ extension NotesEditorScreenViewController:UIImagePickerControllerDelegate, UINav
         if let image = info[.originalImage] as? UIImage {
             let selectedImage: UIImage = image
             imageButton.setImage(selectedImage, for: .normal)
-
+            loadingIndicator.stopAnimating()
             picker.dismiss(animated: true)
         }
     }
+    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        loadingIndicator.stopAnimating()
+        picker.dismiss(animated: true)
     }
 }
