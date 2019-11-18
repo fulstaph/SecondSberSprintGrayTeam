@@ -13,7 +13,7 @@ class NotesEditorScreenViewController: UIViewController {
     let imageButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 20
-        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.borderColor = UIColor.lightGray.cgColor
         button.layer.borderWidth = 1
         button.backgroundColor = .white
         button.setTitle("+Добавить картинку", for: .normal)
@@ -25,7 +25,7 @@ class NotesEditorScreenViewController: UIViewController {
     let textField: UITextField = {
         let textField = UITextField()
         textField.layer.cornerRadius = 20
-        textField.layer.borderColor = UIColor.black.cgColor
+        textField.layer.borderColor = UIColor.lightGray.cgColor
         textField.layer.borderWidth = 1
         textField.textAlignment = .center
         textField.backgroundColor = .white

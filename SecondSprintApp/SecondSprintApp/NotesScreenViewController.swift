@@ -123,7 +123,10 @@ extension NotesScreenViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MySecondTableViewCell.reuseIdOfCell, for: indexPath) as! MySecondTableViewCell
-        cell.textOfNote.text = NoteSingleton.shared.notes[indexPath.row]
+        tableView.beginUpdates()
+        cell.textOfNote.text = NoteSingleton.shared.notes.notes[indexPath.row]
+        cell.containerForImage.setImage(NoteSingleton.shared.notes.images[indexPath.row], for: .normal)
+        tableView.endUpdates()
         return cell
     }
     
@@ -158,7 +161,7 @@ class MySecondTableViewCell: UITableViewCell {
     
     public let textOfNote = UILabel()
 //    public let imageOfNote = UIImage()
-    public let containerForImage = UIView()
+    public let containerForImage = UIButton()
   
 //    let containerForImage: UIView = {
 //        let view = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
@@ -169,7 +172,7 @@ class MySecondTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        containerForImage.backgroundColor = .black
+        containerForImage.backgroundColor = .lightGray
         containerForImage.clipsToBounds = true
         textOfNote.textAlignment = .left
         textOfNote.font = .systemFont(ofSize: 20)
