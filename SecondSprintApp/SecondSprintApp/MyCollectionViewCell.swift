@@ -38,8 +38,8 @@ class MyCollectionViewCell: UICollectionViewCell {
             let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 50))
                     button.setTitle("+ Добавить еще одну карточку", for:  .normal)
                     button.titleLabel?.font = .systemFont(ofSize: 14)
-                    button.backgroundColor = .lightGray
-                    button.setTitleColor(.black, for: .normal)
+                    button.backgroundColor = .darkGray
+                    button.setTitleColor(.white, for: .normal)
                     button.addTarget(self, action: #selector(addTapped), for: .touchUpInside)
                     return button
         }()
@@ -61,34 +61,7 @@ class MyCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-/*
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        let footer: UIButton = {
-            let button = UIButton()
-            button.setTitle("+ Добавить еще одну карточку", for:  .normal)
-            button.titleLabel?.font = .systemFont(ofSize: 14)
-            button.backgroundColor = .lightGray
-            button.setTitleColor(.black, for: .normal)
-            button.addTarget(self, action: #selector(addTapped), for: .touchUpInside)
-            button.translatesAutoresizingMaskIntoConstraints = false
-            return button
-        }()
 
-        self.layer.masksToBounds = true
-        self.layer.cornerRadius = 10.0
-
-        tableView.dragInteractionEnabled = true
-        tableView.dragDelegate = self
-        tableView.dropDelegate = self
-        tableView.register(MyTableViewCell.self, forCellReuseIdentifier: MyTableViewCell.reuseId)
-        tableView.tableFooterView = footer
-        footer.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0).isActive = true
-        footer.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
-        footer.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-    }
-    */
     @objc func addTapped() {
         let alertController = UIAlertController(title: "Add Item", message: nil, preferredStyle: .alert)
         alertController.addTextField(configurationHandler: nil)
@@ -107,7 +80,8 @@ class MyCollectionViewCell: UICollectionViewCell {
                 id = lists.id
             }
             let addedIndexPath = IndexPath(item: data.items.count - 1, section: 0)
-            let card = TrelloCard(name: "New card", desc: text, idList: id)
+//            let card = TrelloCard(name: "New card", desc: text, idList: id)
+            let card = TrelloCard(name: text, desc: "Something", idList: id)
             self.boardData.addCard(card)
             self.tableView.insertRows(at: [addedIndexPath], with: .automatic)
             self.tableView.scrollToRow(at: addedIndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
@@ -137,7 +111,6 @@ extension MyCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MyTableViewCell.reuseId, for: indexPath) as! MyTableViewCell
         let task =  board?.items[indexPath.row]
-//        cell.backgroundColor = .white
 //        cell.nameLabel.text = task
         cell.textLabel?.text = task
         return cell

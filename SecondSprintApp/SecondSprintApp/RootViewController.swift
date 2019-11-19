@@ -56,7 +56,7 @@ class RootViewController: UIViewController {
         let settingVC = SettingsScreenViewController()
         let notesVc = NotesScreenViewController()
         let tapBarController = UITabBarController()
-        
+        self.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "task"), tag: 1)
         tapBarController.viewControllers = [mainVC, notesVc, settingVC]
         mainVC.modalTransitionStyle = .flipHorizontal
         navigatorController.viewControllers = [tapBarController]

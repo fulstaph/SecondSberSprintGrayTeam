@@ -33,6 +33,10 @@ class TasksScreenViewController: UICollectionViewController, UICollectionViewDel
 //    required init?(coder: NSCoder) {
 //        fatalError("init(coder:) has not been implemented")
 //    }
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "task"), tag: 1)
+    }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
@@ -68,7 +72,6 @@ class TasksScreenViewController: UICollectionViewController, UICollectionViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
         DispatchQueue.main.async {
             self.downloadAnimation()
             self.downloadLabel.fadeTransition(1.0)
@@ -119,6 +122,7 @@ class TasksScreenViewController: UICollectionViewController, UICollectionViewDel
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationBar()
+        awakeFromNib()
         self.tabBarController?.navigationItem.title = "Добавить список"
     }
     
