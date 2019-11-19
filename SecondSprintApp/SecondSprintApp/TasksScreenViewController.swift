@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import MobileCoreServices
 
-class TasksScreenViewController: UIViewController {
+class TasksScreenViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout  {
 
     let layout = UICollectionViewFlowLayout()
     
-    var collectionView: UICollectionView!
+//    var collectionView: UICollectionView!
     
     var boards: [Board] = []
     
@@ -24,14 +25,14 @@ class TasksScreenViewController: UIViewController {
     var spaceship: UIView!
     var secondSpaceship: UIView!
     
-    init() {
-        super.init(nibName: nil, bundle: nil)
-        self.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "task"), tag: 1)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+//    init() {
+//        super.init(nibName: nil, bundle: nil)
+//        self.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "task"), tag: 1)
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
@@ -54,6 +55,16 @@ class TasksScreenViewController: UIViewController {
         self.tabBarController?.navigationItem.rightBarButtonItem = addButtonItem
 
     }
+    
+    func setupRemoveBarButtonItem() {
+        let button = UIButton(type: .system)
+        button.setTitle("Delete", for: .normal)
+        button.setTitleColor(.red, for: .normal)
+        button.addInteraction(UIDropInteraction(delegate: self))
+        let removeBarButtonItem = UIBarButtonItem(customView: button)
+        navigationItem.leftBarButtonItem = removeBarButtonItem
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -87,12 +98,13 @@ class TasksScreenViewController: UIViewController {
                 }
                 self.boards.append(newBoard)
             }
+            
             self.layout.scrollDirection = .horizontal
             self.collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: self.layout)
             self.collectionView.contentInset = UIEdgeInsets(top: 60, left: 0, bottom: 20, right: 40)
             self.collectionView.backgroundColor = .gray
             self.collectionView.register(MyCollectionViewCell.self, forCellWithReuseIdentifier: MyCollectionViewCell.reuseId)
-            self.view.addSubview(self.collectionView)
+//            self.view.addSubview(self.collectionView)
             
             
             self.collectionView.delegate = self
@@ -233,14 +245,31 @@ class TasksScreenViewController: UIViewController {
         })
 
     }
-}
-
-extension TasksScreenViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    
+//    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCollectionViewCell.reuseId, for: indexPath) as! MyCollectionViewCell
+//    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return boards.count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCollectionViewCell.reuseId, for: indexPath) as! MyCollectionViewCell
+        cell.setup(with: boards[indexPath.row])
+        cell.parentVC = self
+        return cell
+        
     }
 }
 
+//extension TasksScreenViewController: UICollectionViewDelegate {
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCollectionViewCell.reuseId, for: indexPath) as! MyCollectionViewCell
+//    }
+//}
+
+/*
 extension TasksScreenViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -257,7 +286,7 @@ extension TasksScreenViewController: UICollectionViewDataSource {
     
     
 }
-
+*/
 extension UIView {
     func fadeTransition(_ duration:CFTimeInterval) {
         let animation = CATransition()
@@ -266,5 +295,29 @@ extension UIView {
         animation.type = CATransitionType.fade
         animation.duration = duration
         layer.add(animation, forKey: CATransitionType.fade.rawValue)
+    }
+}
+
+extension TasksScreenViewController: UIDropInteractionDelegate {
+    
+    func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {
+        return UIDropProposal(operation: .move)
+    }
+    
+    func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
+        if session.hasItemsConforming(toTypeIdentifiers: [kUTTypePlainText as String]) {
+            session.loadObjects(ofClass: NSString.self) { (items) in
+                guard let _ = items.first as? String else {
+                    return
+                }
+                
+                if let (dataSource, sourceIndexPath, tableView) = session.localDragSession?.localContext as? (Board, IndexPath, UITableView) {
+                    tableView.beginUpdates()
+                    dataSource.items.remove(at: sourceIndexPath.row)
+                    tableView.deleteRows(at: [sourceIndexPath], with: .automatic)
+                    tableView.endUpdates()
+                }
+            }
+        }
     }
 }

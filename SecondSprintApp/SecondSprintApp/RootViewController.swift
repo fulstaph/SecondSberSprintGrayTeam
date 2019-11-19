@@ -51,7 +51,8 @@ class RootViewController: UIViewController {
     
     func showTaskScreen() {
         let navigatorController = UINavigationController(rootViewController: LoginScreenViewController())
-        let mainVC = TasksScreenViewController()
+        let flowLayout = UICollectionViewFlowLayout()
+        let mainVC = TasksScreenViewController(collectionViewLayout: flowLayout)
         let settingVC = SettingsScreenViewController()
         let notesVc = NotesScreenViewController()
         let tapBarController = UITabBarController()
