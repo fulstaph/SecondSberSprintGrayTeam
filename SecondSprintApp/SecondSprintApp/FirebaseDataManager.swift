@@ -54,9 +54,7 @@ class FirebaseDataManager {
             print(response?.suggestedFilename ?? url.lastPathComponent)
             print("Download Finished")
             DispatchQueue.main.async() {
-                for note in self.notes.values {
                     NoteSingleton.shared.notes.addNote(withText: text, withImage: UIImage(data: data)!)
-                }
             }
         }
     }

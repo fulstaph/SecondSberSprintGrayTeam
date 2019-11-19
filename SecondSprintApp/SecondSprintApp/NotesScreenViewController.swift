@@ -103,6 +103,8 @@ class NotesScreenViewController: UIViewController {
             for note in notes.values {
                 self.data.downloadImage(from: URL(string: note.imgUrl)!, with: note.text)
             }
+            self.tabBarController?.navigationItem.title = "Notes (\(NoteSingleton.shared.notes.noteCount))"
+
         })
     }
     
